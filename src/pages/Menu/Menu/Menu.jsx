@@ -21,7 +21,7 @@ const Menu = () => {
         <div>
             <Helmet>
                 <title>Bistro Boss | Menu</title>
-                <link rel="canonical" href="https://www.tacobell.com/" />
+                
             </Helmet>
 
             <Cover img={menuImg} title="Our Menu"></Cover>
@@ -33,7 +33,7 @@ const Menu = () => {
             {/* dessert items */}
             <MenuCategory
             items={desserts}
-            title="Dessert"
+            title="dessert"
             img={dessertImg}
             ></MenuCategory>
             <MenuCategory items={pizza} title={"pizza"} img={pizzaImg}></MenuCategory>
