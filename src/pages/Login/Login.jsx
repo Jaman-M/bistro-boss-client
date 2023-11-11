@@ -33,22 +33,15 @@ const Login = () => {
 
                 // for sweetalert2
                 Swal.fire({
-                    title: "User Login Successful.",
+                    title: 'login succesful!',
                     showClass: {
-                        popup: `
-                        animate__animated
-                        animate__fadeInUp
-                        animate__faster
-                        `
+                      popup: 'animate__animated animate__fadeInDown'
                     },
                     hideClass: {
-                        popup: `
-                        animate__animated
-                        animate__fadeOutDown
-                        animate__faster
-                        `
+                      popup: 'animate__animated animate__fadeOutUp'
                     }
-                });
+                  })
+                  
                 navigate(from, { replace: true });
             })
     }
