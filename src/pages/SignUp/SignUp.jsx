@@ -23,13 +23,13 @@ const SignUp = () => {
                     .then(() => {
                         const saveUser = { name: data.name, email: data.email }
                         // console.log('User profile info updated');
-                        fetch('http://localhost:5000/users'), {
+                        fetch('http://localhost:5000/users',{
                             method: 'POST',
                             headers: {
                                 'content-type': 'application/json'
                             },
                             body: JSON.stringify(saveUser)
-                        }
+                        })
                             .then(res => res.json())
                             .then(data => {
                                 if (data.insertedId) {
