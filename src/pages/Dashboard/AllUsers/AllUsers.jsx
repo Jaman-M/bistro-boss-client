@@ -26,7 +26,8 @@ import useAxiosSecure from '../../../hooks/useAxiosSecure';
 
 const AllUsers = () => {
 
-    const [axiosSecure] = useAxiosSecure()
+    // const [axiosSecure] = useAxiosSecure() // for using [] not working
+    const axiosSecure = useAxiosSecure()
     const { data: users = [], refetch } = useQuery({
         queryKey: ['users'],
         queryFn: async () => {
