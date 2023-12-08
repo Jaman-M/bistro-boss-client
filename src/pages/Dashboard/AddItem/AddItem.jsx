@@ -2,13 +2,34 @@ import React from 'react';
 import SectionTitle from '../../../components/SectionTitle/SectionTitle';
 import { useForm } from 'react-hook-form'
 
+const image_hosting_token = import.meta.env.VITE_Image_Upload_token;
+
 const AddItem = () => {
     // react-hook form start here
     const { register, handleSubmit, formState: { errors } } = useForm();
+    const img_hosting_url = `https://api.imgbb.com/1/upload?key=${image_hosting_token}`
     const onSubmit = data => {
-        console.log(data)
+
+        // console.log(data)
+        const formData = new FormData();
+        formData.append('image', data.image[0])
+
+        fetch(img_hosting_url, {
+            method: 'POST',
+            body: formData
+        })
+        .then(res => res.json())
+        .then(imgResponse => {
+            if(imgResponse.success){
+                const imgURL = imgResponse.data.display_url;
+                const {name, price, category, recipe} = data;
+                const newItem = {name, price: parseFloat(price), category, recipe, image:imgURL};
+                console.log(newItem);
+            }
+        })
     };
     console.log(errors);
+    console.log(image_hosting_token);
     // react-hook form start end
     return (
         <div className='w-5/6'>
@@ -32,13 +53,14 @@ const AddItem = () => {
                                 <span className="label-text font-semibold">Category*</span>
 
                             </div>
-                            <select {...register("category", { required: true })} className="select select-bordered">
-                                <option disabled selected>Pick one</option>
+                            <select defaultValue="Pick One" {...register("category", { required: true })} className="select select-bordered">
+                                <option disabled>Pick One</option>
                                 <option>Pizza</option>
                                 <option>Soup</option>
                                 <option>Salad</option>
                                 <option>Drinks</option>
                                 <option>Dessert</option>
+                                <option>Deshi</option>
                             </select>
 
                         </label>
