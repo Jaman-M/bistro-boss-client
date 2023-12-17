@@ -11,7 +11,7 @@ const stripePromise = loadStripe(import.meta.env.VITE_Payment_Gateway_PK)
 const Payment = () => {
     const [cart] = useCart();
     const total = cart.reduce((sum, item) => sum + item.price, 0);
-    const price = parseFloat(total.toFixed(2)) //dosomik er por 2 ghor porjonto dekhanor jonne
+    // const price = parseFloat(total.toFixed(2)) //dosomik er por 2 ghor porjonto dekhanor jonne
     return (
         <div className='w-5/6'>
             <SectionTitle subHeading="Please Process" heading="Payment"></SectionTitle>

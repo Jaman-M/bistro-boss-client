@@ -6,18 +6,19 @@ import useAuth from '../../../hooks/useAuth';
 const CheckoutForm = ({ price }) => {
     const stripe = useStripe();
     const elements = useElements();
-    const { user } = useAuth
+    const { user } = useAuth();
     const axiosSecure = useAxiosSecure();
     const [cardError, setCardError] = useState('');
     const [clientSecret, setClientSecret] = useState('');
 
     useEffect(() => {
+        console.log(price);
         axiosSecure.post('/create-payment-intent', { price })
             .then(res => {
-                console.log(res.data.clientSecret);
+                console.log(res.data.clientSecret)
                 setClientSecret(res.data.clientSecret);
             })
-    }, [price, axiosSecure])
+    }, [])
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -42,7 +43,7 @@ const CheckoutForm = ({ price }) => {
         }
         else {
             setCardError('');
-            console.log('payment method', paymentMethod);
+            // console.log('payment method', paymentMethod);
         }
 
         const { paymentIntent, error: confirmError } = await stripe.confirmCardPayment(
@@ -62,7 +63,7 @@ const CheckoutForm = ({ price }) => {
         if (confirmError) {
             console.log(confirmError);
         }
-        console.log(paymentIntent);
+        console.log('payment intent', paymentIntent);
 
     }
 
